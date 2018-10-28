@@ -11,10 +11,14 @@ if (process.argv.length < 3) {
 const filename = process.argv[2];
 fs.readFile(filename, 'utf8', (err, data) => {
   if (err) throw err;
-  const dataArray = data.toString().split('\n');
-  const arenaBounds = dataArray[0].split(' ');
 
-  const arena = new Arena(arenaBounds[0], arenaBounds[1], dataArray.slice(1));
+  // Parse data
+  const dataArray = data.toString().split('\n');
+  const [arenaXBound, arenaYBound] = dataArray[0].split(' ');
+  const instructions = dataArray.slice(1);
+
+  // Initialise objects
+  const arena = new Arena(arenaXBound, arenaYBound, instructions);
   arena.initialiseRobots();
   const output = arena.applyRobotInstructions();
 
