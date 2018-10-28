@@ -1,4 +1,6 @@
 # Robot Wars Code Challenge
+![Robot Wars](https://media.giphy.com/media/l3mZkL7uWCWoVvURO/giphy.gif)
+
 Usage: `node main.js <filename>`
 
 `npm test` to run unit tests
