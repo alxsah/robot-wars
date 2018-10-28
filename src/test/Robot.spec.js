@@ -48,31 +48,65 @@ describe('Robot::Class', () => {
       expect(robot.yPos).to.be.equal(5);
     });
   });
+  describe('moveLeft::Method', () => {
+    it('should set directionIndex to 3 (W) from 0 (N)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'N');
+      robot.moveLeft();
+      expect(robot.directionIndex).to.be.equal(3);
+    });
+    it('should set directionIndex to 2 (S) from 3 (W)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'W');
+      robot.moveLeft();
+      expect(robot.directionIndex).to.be.equal(2);
+    });
+    it('should set directionIndex to 1 (E) from 2 (S)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'S');
+      robot.moveLeft();
+      expect(robot.directionIndex).to.be.equal(1);
+    });
+    it('should set directionIndex to 0 (N) from 1 (E)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'E');
+      robot.moveLeft();
+      expect(robot.directionIndex).to.be.equal(0);
+    });
+  });
+  describe('moveRight::Method', () => {
+    it('should set directionIndex to 0 (N) from 3 (W)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'W');
+      robot.moveRight();
+      expect(robot.directionIndex).to.be.equal(0);
+    });
+    it('should set directionIndex to 1 (E) from 0 (N)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'N');
+      robot.moveRight();
+      expect(robot.directionIndex).to.be.equal(1);
+    });
+    it('should set directionIndex to 2 (S) from 1 (E)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'E');
+      robot.moveRight();
+      expect(robot.directionIndex).to.be.equal(2);
+    });
+    it('should set directionIndex to 3 (W) from 2 (S)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'S');
+      robot.moveRight();
+      expect(robot.directionIndex).to.be.equal(3);
+    });
+  });
   describe('applyInstructions::Method', () => {
     it('should move a robot forward for instruction M', () => {
       const robot = new Robot(0, 0, 5, 5, 'N');
       robot.applyInstructions('M');
       expect(robot.yPos).to.be.equal(1);
     });
-    it('should change directionIndex to 0 (N) from 1 (E) for instruction L', () => {
-      const robot = new Robot(0, 0, 5, 5, 'E');
-      robot.applyInstructions('L');
-      expect(robot.directionIndex).to.be.equal(0);
-    });
-    it('should change directionIndex to 3 (W) from 0 (N) for instruction L', () => {
+    it('should move a robot left for instruction L', () => {
       const robot = new Robot(0, 0, 5, 5, 'N');
       robot.applyInstructions('L');
-      expect(robot.directionIndex).to.be.equal(3);
+      expect(robot.getDirection()).to.be.equal('W');
     });
-    it('should change directionIndex to 2 (S) from 1 (E) for instruction R', () => {
-      const robot = new Robot(0, 0, 5, 5, 'E');
+    it('should move a robot right for instruction R', () => {
+      const robot = new Robot(0, 0, 5, 5, 'N');
       robot.applyInstructions('R');
-      expect(robot.directionIndex).to.be.equal(2);
-    });
-    it('should change directionIndex to 0 (N) from 3 (W) for instruction R', () => {
-      const robot = new Robot(0, 0, 5, 5, 'W');
-      robot.applyInstructions('R');
-      expect(robot.directionIndex).to.be.equal(0);
+      expect(robot.getDirection()).to.be.equal('E');
     });
   });
   describe('getDirection::Method', () => {

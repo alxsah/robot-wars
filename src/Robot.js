@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 class Robot {
   constructor(xPos, yPos, xBound, yBound, direction) {
     this.xPos = xPos;
@@ -7,32 +9,31 @@ class Robot {
     this.directionIndex = Robot.compassPoints.indexOf(direction);
   }
   moveForward() {
-    switch(this.directionIndex) {
-      case 0:
-        this.yPos < this.yBound ? this.yPos++ : null;
-        break;
-      case 1:
-        this.xPos < this.xBound ? this.xPos++ : null;
-        break;
-      case 2:
-        this.yPos > 0 ? this.yPos-- : null;
-        break;
-      case 3: 
-        this.xPos > 0 ? this.xPos-- : null;
-        break;
-    }
+    const incrementPosition = utils.switchcaseF({
+      0: () => { if (this.yPos < this.yBound) this.yPos++; },
+      1: () => { if (this.xPos < this.xBound) this.xPos++; },
+      2: () => { if (this.yPos > 0) this.yPos--; },
+      3: () => { if (this.xPos > 0) this.xPos--; }
+    })(null);
+    incrementPosition(this.directionIndex);
+  }
+  moveRight() {
+    this.directionIndex = (this.directionIndex + 1) % 4;
+  }
+  moveLeft() {
+    this.directionIndex = this.directionIndex === 0
+      ? Robot.compassPoints.length - 1
+      : this.directionIndex - 1;
   }
   applyInstructions(instructions) {
+    const handleInstruction = utils.switchcaseF({
+      'M': () => { this.moveForward() },
+      'L': () => { this.moveLeft() },
+      'R': () => { this.moveRight() }
+    })(null);
+
     for (const i of instructions) {
-      if (i === 'M') {
-        this.moveForward();
-      } else if (i === 'L') {
-        this.directionIndex = this.directionIndex === 0
-          ? Robot.compassPoints.length - 1
-          : this.directionIndex - 1 % 4;
-      } else if (i === 'R') {
-        this.directionIndex = (this.directionIndex + 1) % 4;
-      }
+      handleInstruction(i);
     }
   }
   getDirection() {

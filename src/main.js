@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const Arena = require('./Arena');
 const Robot = require('./Robot');
-const robots = [];
 
 if (process.argv.length < 3) {
   console.log(`Usage: node ${process.argv[1]} <FILENAME>`);
