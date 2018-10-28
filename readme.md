@@ -1,5 +1,5 @@
 # Robot Wars Code Challenge
-![Robot Wars](https://media.giphy.com/media/l3mZkL7uWCWoVvURO/giphy.gif)
+![Robot Wars](https://media.giphy.com/media/l3mZkL7uWCWoVvURO/giphy.webp)
 
 Usage: `node main.js <filename>`
 
@@ -8,4 +8,3 @@ Usage: `node main.js <filename>`
 Note: Input file should be stored as a .txt.
 
 Outputs are logged to the console and written to folder `output`.
-
