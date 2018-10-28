@@ -9,13 +9,12 @@ class Robot {
     this.directionIndex = Robot.compassPoints.indexOf(direction);
   }
   moveForward() {
-    const incrementPosition = utils.switchcaseF({
+    utils.switchcase({
       0: () => { if (this.yPos < this.yBound) this.yPos++; },
       1: () => { if (this.xPos < this.xBound) this.xPos++; },
       2: () => { if (this.yPos > 0) this.yPos--; },
       3: () => { if (this.xPos > 0) this.xPos--; }
-    })(null);
-    incrementPosition(this.directionIndex);
+    })(null)(this.directionIndex);
   }
   moveRight() {
     this.directionIndex = (this.directionIndex + 1) % 4;
@@ -26,14 +25,12 @@ class Robot {
       : this.directionIndex - 1;
   }
   applyInstructions(instructions) {
-    const handleInstruction = utils.switchcaseF({
-      'M': () => { this.moveForward() },
-      'L': () => { this.moveLeft() },
-      'R': () => { this.moveRight() }
-    })(null);
-
     for (const i of instructions) {
-      handleInstruction(i);
+      utils.switchcase({
+        'M': () => { this.moveForward(); },
+        'L': () => { this.moveLeft(); },
+        'R': () => { this.moveRight(); }
+      })(null)(i);
     }
   }
   getDirection() {

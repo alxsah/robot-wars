@@ -21,7 +21,7 @@ describe('Robot::Class', () => {
       expect(robot.xPos).to.be.equal(1);
       expect(robot.yPos).to.be.equal(0);
     });
-    it('should decrement X coordinate for directionIndex 2 (W)', () => {
+    it('should decrement X coordinate for directionIndex 3 (W)', () => {
       const robot = new Robot(1, 1, 5, 5, 'W');
       robot.moveForward();
       expect(robot.xPos).to.be.equal(0);
@@ -71,11 +71,6 @@ describe('Robot::Class', () => {
     });
   });
   describe('moveRight::Method', () => {
-    it('should set directionIndex to 0 (N) from 3 (W)', () => {
-      const robot = new Robot(0, 5, 5, 5, 'W');
-      robot.moveRight();
-      expect(robot.directionIndex).to.be.equal(0);
-    });
     it('should set directionIndex to 1 (E) from 0 (N)', () => {
       const robot = new Robot(0, 5, 5, 5, 'N');
       robot.moveRight();
@@ -90,6 +85,11 @@ describe('Robot::Class', () => {
       const robot = new Robot(0, 5, 5, 5, 'S');
       robot.moveRight();
       expect(robot.directionIndex).to.be.equal(3);
+    });
+    it('should set directionIndex to 0 (N) from 3 (W)', () => {
+      const robot = new Robot(0, 5, 5, 5, 'W');
+      robot.moveRight();
+      expect(robot.directionIndex).to.be.equal(0);
     });
   });
   describe('applyInstructions::Method', () => {

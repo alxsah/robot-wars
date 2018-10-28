@@ -1,10 +1,11 @@
 const executeIfFunction = f =>
   typeof f === 'function' ? f() : f
 
-const switchcase = cases => defaultCase => key =>
+const executeSwitchcase = cases => defaultCase => key =>
   cases.hasOwnProperty(key) ? cases[key] : defaultCase
 
-const switchcaseF = cases => defaultCase => key =>
-  executeIfFunction(switchcase(cases)(defaultCase)(key))
+// Alternative switch implementation
+const switchcase = cases => defaultCase => key =>
+  executeIfFunction(executeSwitchcase(cases)(defaultCase)(key))
 
-module.exports = { switchcase, switchcaseF };
+module.exports = { switchcase };
